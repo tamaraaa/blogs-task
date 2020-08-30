@@ -1,4 +1,13 @@
 {
+    "root": true,
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es6": true,
+        "node": true,
+        "mocha": true,
+        "jquery": true
+    },
     "extends": [
         "eslint:recommended",
         "plugin:react/recommended",
@@ -18,6 +27,18 @@
     "plugins": [
         "react"
     ],
+    "globals": {
+        "chai": true,
+        "sinon": true,
+        "should": true,
+        "nock": true,
+        "expect": true,
+        "$": true,
+        "_": true,
+        "Promise": true,
+        "Primus": true,
+        "google": true
+    },
     "rules": {
         "camelcase": "off",
         "comma-dangle": ["off", "always-multiline"],

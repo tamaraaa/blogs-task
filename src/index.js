@@ -9,7 +9,6 @@ import initStore from './redux/store';
 
 const store = initStore();
 
-export default store;
 
 ReactDOM.render(
   <React.StrictMode>

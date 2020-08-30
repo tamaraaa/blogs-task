@@ -1,0 +1,58 @@
+@import '../../scss/variables.scss';
+
+.Modal {
+    // width: 40vw;
+    display: none;
+    height: auto;
+    border: 1px solid $text-color;
+    position: absolute;
+    top: 10vw;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    background-color: $background-color;
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1vw;
+        background: $header-color;
+        color: $white-text;
+    }
+
+    &__content {
+        padding: 4vw;
+
+        &__title {
+            display: flex;
+            margin-bottom: 3vw;
+
+            p {
+                margin-right: 3vw;
+            }
+        }
+
+        &__text {
+            display: flex;
+
+            p {
+                margin-right: 3vw;
+            }
+        }
+    }
+
+    &__buttons {
+        display: flex;
+        justify-content: space-between;
+        padding: 0 4vw 2vw 4vw;
+
+        button {
+            padding: 1vw;
+        }
+    }
+}
+
+.active {
+    display: block;
+}

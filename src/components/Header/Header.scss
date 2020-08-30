@@ -1,0 +1,19 @@
+@import '../../scss/variables';
+
+.Header {
+    display: flex;
+    align-items: center;
+    background-color: $header-color;
+    color: $white-text;
+    width: 100vw;
+    position: absolute;
+    justify-content: flex-end;
+    top: 0;
+    left: 0;
+    padding: 10px 20px;
+
+    &__logo {
+        position: absolute;
+        left: 10px;
+    }
+}

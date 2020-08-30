@@ -1,0 +1,42 @@
+.BlogList {
+    display: flex;
+    width: 90vw;
+    margin: 3vw auto;
+
+    &__list {
+        width: 60%;
+
+        @media only screen and (max-width: 1200px) {
+            width: 100%;
+        }
+    }
+
+    &__categories {
+        width: 30%;
+        padding: 1vw;
+        border: 1px solid grey;
+        display: flex;
+        flex-direction: column;
+
+        p {
+            font-weight: bold;
+        }
+
+        @media only screen and (max-width: 1200px) {
+            width: 100%;
+        }
+
+        span {
+            text-align: left;
+
+            a {
+                margin-right: 2vw;
+            }
+        }
+    }
+
+    @media only screen and (max-width: 1200px) {
+        flex-direction: column;
+        align-items: center;
+    }
+}
