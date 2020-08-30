@@ -62,6 +62,22 @@ export const blogReducer = (state = INITIAL_STATE, { type, payload }) => {
                 isLoading: false,
                 error: payload
             };           
+        case TYPES.CREATE_CATEGORY_START:
+            return {
+                ...state,
+                isLoading: true
+            };
+        case TYPES.CREATE_CATEGORY_END:
+            return {
+                ...state,
+                categories: payload,
+            };
+        case TYPES.CREATE_CATEGORY_ERROR:
+            return {
+                ...state,
+                isLoading: false,
+                error: payload
+            };       
         default:
             return state;
 

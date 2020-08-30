@@ -1,11 +1,19 @@
 .Blog {
     background-color: grey;
     margin-bottom: 5vw;
+    padding: 1vw 3vw;
 
     &__header {
-        &__img {
-            width: 80px;
-            height: 80px;
+        display: flex;
+        justify-content: space-between;
+
+        &__left {
+            display: flex;
+
+            &__img {
+                width: 80px;
+                height: 80px;
+            }
         }
     }
 }

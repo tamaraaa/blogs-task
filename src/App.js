@@ -22,11 +22,11 @@ function App({getBlogs, categoryId, getCategories, categories}) {
   return (
     <div className={CLASS}>
         <Header />
-        {categories.length ? 
+        {categories && categories.length ? 
           <Content setShowModal={setShowModal} /> :   
           <div className={`${CLASS}__zero-state`}>
             <img src={zeroStateImg}/>
-            <p>Currently there are no categories. To start creating click <a href='#'>here </a></p>
+            <p>Currently there are no categories. To start creating click <a href='#' onClick={()=> setShowModal(true)}>here </a></p>
           </div>
         }
         <Modal setShowModal={setShowModal} showModal={showModal}/>

@@ -100,3 +100,36 @@ export const createPost = (categoryId, title, text) =>{
           });
     };
 };
+// CREATE CATEGORY
+
+const createCategoryStart = () =>{
+    return {
+        type: TYPES.CREATE_CATEGORY_START
+    };
+};
+const createCategoryEnd = (payload) =>{
+    return {
+        type: TYPES.CREATE_CATEGORY_END,
+        payload
+    };
+};
+const createCategoryError = (error) =>{
+    return {
+        type: TYPES.CREATE_CATEGORY_ERROR,
+        error
+    };
+};
+export const createCategory = title =>{
+    return dispatch =>{
+        dispatch(createCategoryStart());
+        axios.post('https://frontend-api-test-nultien.azurewebsites.net/api/Category', {name: title})
+        .then(resp => {
+            dispatch(createCategoryEnd(resp.data.resultData));
+        })
+        .catch(function (error) {
+            console.log(error);
+            dispatch(createCategoryError(error));
+          });
+
+    };
+};
