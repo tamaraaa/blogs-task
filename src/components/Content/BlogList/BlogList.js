@@ -5,22 +5,17 @@ import Blog from './Blog/Blog';
 
 import './BlogList.scss';
 
-const CLASS = 'BlogList';
-const BlogList = ({categories, blogList}) =>{
+const BlogList = ({categories, blogList, setShowModal}) =>{
     return (
-        <div className={CLASS}>
-            <div className={`${CLASS}__categories`}>
+        <div className='blogList'>
+            <div className='blogList__categories'>
                 <p>Blog Categories</p>
                 <span>
-                { categories && categories.map((category, index)=>{
-                    return (<a href='#' key={`${category.id}${category.name}`} id={category.id} className={`${CLASS}__categories__link`}>{category.name}</a>);
-                })} 
+                { categories.length && categories.map( category =>(<a href='#' key={`${category.id}${category.name}`} id={category.id} className='blogList__categories__link'>{category.name}</a>))} 
                 </span>             
             </div>
-            <div className={`${CLASS}__list`}>
-            { blogList && blogList.map((blog, index)=>{
-                    return (<Blog key={`${blog.id}${blog.title}`} blog={blog}/>);
-                })}  
+            <div className='blogList__list'>
+            { blogList && blogList.map( blog=>(<Blog setShowModal={setShowModal} key={`${blog.id}${blog.title}`} blog={blog}/>))}  
             </div>
         </div>
     );

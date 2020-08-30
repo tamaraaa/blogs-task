@@ -77,7 +77,23 @@ export const blogReducer = (state = INITIAL_STATE, { type, payload }) => {
                 ...state,
                 isLoading: false,
                 error: payload
-            };       
+            }; 
+        case TYPES.SEARCH_START:
+            return {
+                ...state,
+                isLoading: true
+            };
+        case TYPES.SEARCH_END:
+            return {
+                ...state,
+                blogList: payload,
+            };
+        case TYPES.SEARCH_ERROR:
+            return {
+                ...state,
+                isLoading: false,
+                error: payload
+            };           
         default:
             return state;
 

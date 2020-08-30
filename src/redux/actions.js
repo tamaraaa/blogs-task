@@ -133,3 +133,66 @@ export const createCategory = title =>{
 
     };
 };
+// SEARCH POST
+const searchStart = () =>{
+    return {
+        type: TYPES.SEARCH_START
+    };
+};
+const searchEnd = (payload) =>{
+    return {
+        type: TYPES.SEARCH_END,
+        payload
+    };
+};
+const searchError = (error) =>{
+    return {
+        type: TYPES.SEARCH_ERROR,
+        error
+    };
+};
+export const search = term =>{
+    return dispatch =>{
+        dispatch(searchStart());
+        axios.get(`https://frontend-api-test-nultien.azurewebsites.net/api/BlogPosts/Search?term=${term}`)
+        .then(resp => {
+            dispatch(searchEnd(resp.data.resultData));
+        })
+        .catch(function (error) {
+            console.log(error);
+            dispatch(searchError(error));
+          });
+    };
+};
+// DELETE POST
+const deletePostStart = () =>{
+    return {
+        type: TYPES.DELETE_POST_START
+    };
+};
+const deletePostEnd = () =>{
+    return {
+        type: TYPES.DELETE_POST_END,
+    };
+};
+const deletePostError = (error) =>{
+    return {
+        type: TYPES.DELETE_POST_ERROR,
+        error
+    };
+};
+export const deletePost = (post, categoryId) =>{
+    return dispatch =>{
+        dispatch(deletePostStart());
+        axios.delete(`https://frontend-api-test-nultien.azurewebsites.net/api/BlogPosts/${post}`)
+        .then(resp => {
+            dispatch(deletePostEnd());
+            dispatch(getBlogs(categoryId));
+
+        })
+        .catch(function (error) {
+            console.log(error);
+            dispatch(deletePostError(error));
+          });
+    };
+};

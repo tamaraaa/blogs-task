@@ -1,10 +1,13 @@
-.BlogList {
+@import '../../../scss/variables.scss';
+
+.blogList {
     display: flex;
     width: 90vw;
     margin: 3vw auto;
+    justify-content: space-between;
 
     &__list {
-        width: 60%;
+        width: 65%;
 
         @media only screen and (max-width: 1200px) {
             width: 100%;
@@ -13,13 +16,34 @@
 
     &__categories {
         width: 30%;
-        padding: 1vw;
-        border: 1px solid grey;
         display: flex;
         flex-direction: column;
+        background-color: #F5F6F8;
+        color: $text-color;
+
 
         p {
             font-weight: bold;
+            font-size: 2vw;
+            margin: 1vw auto;
+        }
+
+        span {
+            padding: 2vw;
+            height: 3vw;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+
+            &:hover {
+                background-color: $light-blue;
+                font-weight: bolder;
+            }
+
+            a {
+                text-decoration: none;
+                color: $text-color;
+            }
         }
 
         @media only screen and (max-width: 1200px) {

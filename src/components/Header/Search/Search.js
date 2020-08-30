@@ -1,24 +1,26 @@
 import React, {useState} from 'react';
 import {connect} from 'react-redux';
 
+import {search} from '../../../redux/actions';
+
 import './Search.scss';
 
-const CLASS = 'Search';
-const Search = () =>{
-
+const Search = ({search}) =>{
     const [inputValue, setInputValue] = useState('');
-    console.log(inputValue);
+    const handleSearch = (e) =>{
+        if (e.key === 'Enter') {
+            search(inputValue);          }
+    };
     return (
-        <div className={CLASS}>
-            <input onChange={(e)=> setInputValue(e.target.value)} value={inputValue} type='text' placeholder="Search"/>
+        <div className='search'>
+            <input onKeyDown={(e)=>handleSearch(e)} onChange={(e)=> setInputValue(e.target.value)} value={inputValue} type='text' placeholder="Search"/>
         </div>
     );
-
 };
 const mapStateToProps = (state) =>({
     state
 });
-const mapDispatchToProps = (dispatch) =>({
-    
-});
+const mapDispatchToProps = {
+    search
+  };
 export default connect(mapStateToProps, mapDispatchToProps)(Search);

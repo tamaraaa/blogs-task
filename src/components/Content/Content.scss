@@ -1,5 +1,12 @@
-.Content {
+.content {
     margin-top: 80px;
     display: flex;
     flex-direction: column;
+
+    &__headline {
+        margin: 1vw auto;
+        text-align: left;
+        width: 90vw;
+        font-weight: bold;
+    }
 }

@@ -11,7 +11,7 @@ import zeroStateImg from './images/zero-state.svg';
 import './App.scss';
 
 const CLASS = 'App';
-function App({getBlogs, categoryId, getCategories, categories}) {
+const App = ({getBlogs, categoryId, getCategories, categories}) =>{
 
   useEffect(()=>{
     getCategories();
@@ -32,13 +32,13 @@ function App({getBlogs, categoryId, getCategories, categories}) {
         <Modal setShowModal={setShowModal} showModal={showModal}/>
     </div>
   );
-}
+};
 const mapStateToProps = ({categoryId, categories}) =>({
   categoryId,
   categories
 });
-const mapDispatchToProps = dispatch => ({
-  getCategories: () => dispatch(getCategories()),
-	getBlogs: categoryId => dispatch(getBlogs(categoryId))
-});
+const mapDispatchToProps = {
+  getCategories,
+	getBlogs
+};
 export default connect(mapStateToProps, mapDispatchToProps)(App);

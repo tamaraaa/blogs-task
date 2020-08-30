@@ -41,10 +41,11 @@ const Modal = ({showModal, setShowModal, createPost, categoryId, categories, cre
                 </div>
         </>
     );
+    const titleToShow = !categories ? 'Create Category':'Add/Edit blog post';
     return (
         <div className={`${CLASS} ${showModal ? 'active': ''}`}>
             <div className={`${CLASS}__header`}>
-                <span className={`${CLASS}__header__title`}>{categories ? 'Create Category':'Add/Edit blog post'}</span>
+                <span className={`${CLASS}__header__title`}>{titleToShow}</span>
                 <span className={`${CLASS}__header__CLOSE`}> x </span>
             </div>
             <div className={`${CLASS}__content`}>
@@ -62,8 +63,8 @@ const mapStateToProps = ({categoryId, categories}) =>({
     categoryId,
     categories
 });
-const mapDispatchToProps = dispatch =>({
-    createPost: (categoryId, title, text) => dispatch(createPost(categoryId, title, text)),
-    createCategory: categoryTitle => dispatch(createCategory(categoryTitle))
-});
+const mapDispatchToProps = {
+    createPost: (categoryId, title, text) => (createPost(categoryId, title, text)),
+    createCategory: categoryTitle => (createCategory(categoryTitle))
+  };
 export default connect(mapStateToProps, mapDispatchToProps)(Modal);
