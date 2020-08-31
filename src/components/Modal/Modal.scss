@@ -16,20 +16,29 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 1vw;
+        padding: 10px 20px;
         background: $header-color;
         color: $white-text;
+
+        &__close {
+            cursor: pointer;
+        }
     }
 
     &__content {
-        padding: 4vw;
+        padding: 40px;
 
         &__title {
             display: flex;
-            margin-bottom: 3vw;
+            margin-bottom: 30px;
+            align-items: center;
 
             p {
-                margin-right: 3vw;
+                margin-right: 20px;
+            }
+
+            input {
+                padding: 5px 10px;
             }
         }
 
@@ -37,7 +46,11 @@
             display: flex;
 
             p {
-                margin-right: 3vw;
+                margin-right: 20px;
+            }
+
+            textarea {
+                padding: 5px 10px;
             }
         }
     }
@@ -45,10 +58,17 @@
     &__buttons {
         display: flex;
         justify-content: space-between;
-        padding: 0 4vw 2vw 4vw;
+        padding: 0 40px 20px 40px;
 
         button {
-            padding: 1vw;
+            padding: 10px;
+            cursor: pointer;
+            color: $white-text;
+            background-color: $header-color;
+            width: fit-content;
+            border: none;
+            border-radius: 3px;
+
         }
     }
 }

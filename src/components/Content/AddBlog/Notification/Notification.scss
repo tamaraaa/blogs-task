@@ -2,9 +2,9 @@
 
 .notification {
     width: 90vw;
-    margin-bottom: 2vw;
+    margin-bottom: 40px;
     border: 2px solid $text-color;
-    height: 5vw;
+    height: 100px;
     background-color: $background-light;
     display: flex;
     justify-content: center;
@@ -15,6 +15,7 @@
         position: absolute;
         right: 15px;
         top: 15px;
+        cursor: pointer;
     }
 }
 

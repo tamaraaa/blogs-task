@@ -258,3 +258,5 @@ export const activeCategory = payload => {
         payload
     });};
 };
+
+export const removeNotification = () => ({type: TYPES.REMOVE_NOTIFICATION});

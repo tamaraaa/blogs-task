@@ -27,7 +27,6 @@ const Modal = ({showModal, setShowModal, createPost, categoryId, categories, cre
         createCategory(categoryTitle);
         setShowModal(false);
     };
-    console.log('showCategoryModal', showCategoryModal);
     const postModalContent = (
         <>
         <div className='modal__content__title'>
@@ -48,18 +47,19 @@ const Modal = ({showModal, setShowModal, createPost, categoryId, categories, cre
                 </div>
         </>
     );
+    const postModal = (categories && categories.length && !showCategoryModal);
     const titleToShow = !categories || showCategoryModal ? 'Create Category':'Add/Edit blog post';
     return (
         <div className={`modal ${showModal ? 'active': ''}`}>
             <div className='modal__header'>
                 <span className='modal__header__title'>{titleToShow}</span>
-                <span className='modal__header__CLOSE'> x </span>
+                <span className='modal__header__close' onClick={()=> setShowModal(false)}> x </span>
             </div>
             <div className='modal__content'>
-                {(categories && categories.length && !showCategoryModal) ? postModalContent : categoriesModalContent }
+                { postModal ? postModalContent : categoriesModalContent }
             </div>
             <div className='modal__buttons'>
-                {(categories && categories.length && !showCategoryModal)? <button className='modal__buttons__post' onClick={()=>handlePost()}>Post</button> : <button className='modal__buttons__post' onClick={()=>handleCategory()}>Create</button>}
+                {postModal ? <button className='modal__buttons__post' onClick={handlePost}>Post</button> : <button className='modal__buttons__post' onClick={()=>handleCategory()}>Create</button>}
                 <button className='modal__buttons__cancel' onClick={()=> setShowModal(false)}>Cancel</button>
             </div>
 

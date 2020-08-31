@@ -30,6 +30,7 @@ const BlogList = ({categories, blogList, setShowModal, categoryId, setShowCatego
             <div className='blogList__list'>
             {showSearched && <p>Search results for all categories <a href='#' onClick={()=>setShowSearched(false)}>back</a></p>}
             { blogList && blogList.map( blog=>(<Blog setShowModal={setShowModal} key={`${blog.id}${blog.title}`} blog={blog}/>))}  
+            {!blogList.length && <p className='blogList__list__empty'>No posts to show :(</p>}
             </div>
         </div>
     );

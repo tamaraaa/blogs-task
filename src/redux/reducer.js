@@ -147,8 +147,12 @@ export const blogReducer = (state = INITIAL_STATE, { type, payload }) => {
             return {
                 ...state,
                 notification: {type: 'error', text: 'Post is not deleted!'}
-            };
-        
+            };  
+        case TYPES.REMOVE_NOTIFICATION:
+            return {
+                ...state,
+                notification: null
+            };  
         default:
             return state;
 

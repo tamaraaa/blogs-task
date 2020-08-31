@@ -8,12 +8,14 @@
     width: 90vw;
 
     &__button {
-        width: 30vw;
+        width: 200px;
         cursor: pointer;
         color: $white-text;
         background-color: $header-color;
         width: fit-content;
-        padding: 1vw 5vw;
+        padding: 20px 40px;
         align-self: flex-end;
+        border: none;
+        border-radius: 3px;
     }
 }
