@@ -30,13 +30,14 @@
                 height: -moz-fit-content;
                 height: fit-content;
                 display: flex;
-                justify-content: space-between;
+                justify-content: flex-end;
                 margin-top: 10px;
+
             }
 
             button {
                 cursor: pointer;
-                color: $white-text;
+                color: $light-text;
                 background-color: $header-color;
                 width: fit-content;
                 padding: 10px;
@@ -45,10 +46,12 @@
                 text-align: center;
                 border: none;
 
+
                 @media only screen and (max-width: 600px) {
                     width: 50px;
                     padding: 0;
                     height: 30px;
+                    margin-left: 10px;
                 }
 
 

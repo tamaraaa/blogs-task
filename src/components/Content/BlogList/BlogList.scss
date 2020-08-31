@@ -1,112 +1,110 @@
 @import '../../../scss/variables.scss';
 
 .blogList {
-    display: flex;
-    width: 90vw;
-    margin: 40px auto;
-    justify-content: space-between;
+	display: flex;
+	width: 90vw;
+	margin: 40px auto;
+	justify-content: space-between;
 
-    &__list {
-        width: 65%;
+	&__list {
+		width: 65%;
 
-        &__empty {
-            margin: 50px auto;
-        }
+		&__empty {
+			margin: 50px auto;
+		}
 
-        @media only screen and (max-width: 1200px) {
-            width: 100%;
-        }
-    }
+		@media only screen and (max-width: 1200px) {
+			width: 100%;
+		}
+	}
 
+	&__categories {
+		width: 30%;
+		display: flex;
+		flex-direction: column;
+		background-color: $background-light;
+		color: $text-color;
+		position: relative;
+		min-height: 400px;
 
+		@media only screen and (max-width: 1200px) {
+			min-height: auto;
+			margin-bottom: 50px;
+		}
 
-    &__categories {
-        width: 30%;
-        display: flex;
-        flex-direction: column;
-        background-color: $background-light;
-        color: $text-color;
-        position: relative;
-        min-height: 400px;
+		&__link {
+			&-active {
+				background-color: $light-blue;
+			}
+		}
 
-        @media only screen and (max-width: 1200px) {
-            min-height: auto;
-            margin-bottom: 50px;
-        }
+		p {
+			font-weight: bold;
+			font-size: 20px;
+			margin: 20px;
+			text-align: left;
+		}
 
+		span {
+			text-align: left;
+			display: flex;
+			flex-direction: column;
+			height: fit-content;
+			align-items: center;
+			cursor: pointer;
 
-        &__link {
-            &-active {
-                background-color: $light-blue;
-            }
-        }
+			@media only screen and (max-width: 1200px) {
+				flex-direction: row;
+				flex-wrap: wrap;
+			}
 
-        p {
-            font-weight: bold;
-            font-size: 20px;
-            margin: 20px;
-            text-align: left;
-        }
+			a {
+				width: 100%;
+				padding: 10px 20px;
+				text-decoration: none;
+				color: $text-color;
 
-        span {
-            text-align: left;
-            display: flex;
-            flex-direction: column;
-            height: fit-content;
-            align-items: center;
-            cursor: pointer;
+				@media only screen and (max-width: 1200px) {
+					width: 33%;
+				}
 
-            @media only screen and (max-width: 1200px) {
-                flex-direction: row;
-                flex-wrap: wrap;
-            }
+				&:hover {
+					background-color: $light-blue;
+					font-weight: bolder;
+				}
+			}
+		}
 
-            a {
-                width: 100%;
-                padding: 10px 20px;
-                text-decoration: none;
-                color: $text-color;
+		@media only screen and (max-width: 1200px) {
+			width: 100%;
+		}
 
-                @media only screen and (max-width: 1200px) {
-                    width: 33%;
-                }
+		button {
+			width: 100px;
+			align-self: flex-end;
+			padding: 5px;
+			border: 0;
+			background: no-repeat;
+			position: absolute;
+			top: 10px;
+			right: 10px;
+			color: $header-color;
 
-                &:hover {
-                    background-color: $light-blue;
-                    font-weight: bolder;
-                }
-            }
+			cursor: pointer;
 
+			&:focus {
+				outline: none;
+			}
+		}
+	}
+	p {
+		@media only screen and (max-width: 1200px) {
+			margin-bottom: 30px;
+		}
+	}
 
-        }
-
-        @media only screen and (max-width: 1200px) {
-            width: 100%;
-        }
-
-
-
-        button {
-            width: 100px;
-            align-self: flex-end;
-            padding: 5px;
-            border: 0;
-            background: no-repeat;
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            color: $header-color;
-
-            cursor: pointer;
-
-            &:focus {
-                outline: none;
-            }
-        }
-    }
-
-    @media only screen and (max-width: 1200px) {
-        flex-direction: column;
-        align-items: center;
-    }
+	@media only screen and (max-width: 1200px) {
+		flex-direction: column;
+		align-items: center;
+	}
 }

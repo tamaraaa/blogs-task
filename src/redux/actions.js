@@ -25,13 +25,11 @@ export const getCategories = () => {
         dispatch(getCategoriesStart());
         axios.get(`${baseUrl}/Category`)
         .then(resp => {
-           console.log('data', resp.data);
            dispatch(getCategoriesEnd(resp.data.resultData));
            dispatch(getBlogs(getState().categoryId));
         })
         .catch(function (error) {
             dispatch(getCategoriesError(error));
-            console.log(error);
           });
     };
 };
@@ -56,16 +54,13 @@ const getBlogsError= (error) => {
     };
 };
 export const getBlogs = (categoryId) => {
-    console.log('categoryId', categoryId);
     return dispatch => {
         dispatch(getBlogsStart());
         axios.get(`${baseUrl}/BlogPosts/GetPostByCategory?categoryId=${categoryId}`)
         .then(resp => {
-            console.log('results', resp.data.resultData);
             dispatch(getBlogsEnd(resp.data.resultData));
         })
         .catch(function (error) {
-            console.log(error);
             dispatch(getBlogsError(error));
           });
     };
@@ -89,7 +84,6 @@ const createPostError = (error) => {
     };
 };
 export const createPost = (categoryId, title, text) => {
-    console.log('categoryId-create', categoryId);
     return dispatch => {
         dispatch(createPostStart());
         axios.post(`${baseUrl}/BlogPosts`, {categoryId, title, text})
@@ -98,7 +92,6 @@ export const createPost = (categoryId, title, text) => {
             dispatch(getBlogs(categoryId));
         })
         .catch(function (error) {
-            console.log(error);
             dispatch(createPostError(error));
           });
     };
@@ -130,7 +123,6 @@ export const createCategory = title => {
             dispatch(getCategories());
         })
         .catch(function (error) {
-            console.log(error);
             dispatch(createCategoryError(error));
           });
 
@@ -163,7 +155,6 @@ export const search = (term, categoryId) => {
                 dispatch(searchEnd(resp.data.resultData));
             })
             .catch(function (error) {
-                console.log(error);
                 dispatch(searchError(error));
               });
         } else {
@@ -199,7 +190,6 @@ export const deletePost = (post, categoryId) => {
 
         })
         .catch(function (error) {
-            console.log(error);
             dispatch(deletePostError(error));
           });
     };
@@ -237,7 +227,6 @@ export const editPost = (text, title) => {
                 text,
                 title
             };
-        console.log('updatedPost', updatedPost, 'post', getState().currentPost);
         dispatch(editPostStart());
         axios.put(`${baseUrl}/BlogPosts/${updatedPost.id}`, {...updatedPost})
         .then(resp => {
@@ -246,7 +235,6 @@ export const editPost = (text, title) => {
 
         })
         .catch(function (error) {
-            console.log(error);
             dispatch(editPostError(error));
           });
     };

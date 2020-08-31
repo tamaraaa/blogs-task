@@ -21,7 +21,7 @@
         align-items: center;
         padding: 10px 20px;
         background: $header-color;
-        color: $white-text;
+        color: $light-text;
 
         &__close {
             cursor: pointer;
@@ -51,6 +51,11 @@
             input {
                 padding: 5px 10px;
             }
+
+            &__required {
+                color: $error-text;
+                padding-left: 10px;
+            }
         }
 
         &__text {
@@ -62,6 +67,15 @@
 
             textarea {
                 padding: 5px 10px;
+
+                @media only screen and (max-width: 600px) {
+                    width: 70%;
+                }
+            }
+
+            &__required {
+                color: $error-text;
+                padding-left: 10px;
             }
         }
     }
@@ -74,11 +88,16 @@
         button {
             padding: 10px;
             cursor: pointer;
-            color: $white-text;
+            color: $light-text;
             background-color: $header-color;
             width: fit-content;
             border: none;
             border-radius: 3px;
+
+            &:disabled {
+                opacity: 0.5;
+                cursor: not-allowed;
+            }
 
         }
     }

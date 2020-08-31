@@ -107,8 +107,10 @@
         "react/no-unescaped-entities": "off",
         "react/no-find-dom-node": "warn",
         "react/jsx-no-target-blank": "warn",
+        "react-hooks/exhaustive-deps": "off",
 
         "jsx-a11y/href-no-hash": "off",
-        "jsx-a11y/alt-text": "off"
+        "jsx-a11y/alt-text": "off",
+        "jsx-a11y/anchor-is-valid": "off"
     }
 }
