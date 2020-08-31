@@ -20,6 +20,8 @@
         flex-direction: column;
         background-color: $background-light;
         color: $text-color;
+        position: relative;
+        min-height: 400px;
 
         &__link {
             &-active {
@@ -30,7 +32,8 @@
         p {
             font-weight: bold;
             font-size: 2vw;
-            margin: 1vw auto;
+            margin: 1vw;
+            text-align: left;
         }
 
         span {
@@ -63,9 +66,20 @@
 
 
         button {
-            width: 200px;
+            width: 100px;
             align-self: flex-end;
             padding: 5px;
+            border: 0;
+            background: no-repeat;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: $header-color;
+            cursor: pointer;
+
+            &:focus {
+                outline: none;
+            }
         }
     }
 

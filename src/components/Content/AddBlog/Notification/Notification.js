@@ -1,10 +1,17 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
 import './Notification.scss';
 
-export const Notification = () => {
+export const Notification = ({notification}) => {
     return (
-        <div className='notification'> </div>          
+        <div className={`notification ${notification.type === 'error' ? 'red-text' : 'green-text'}`}>
+            <p>{notification.text}</p>
+            <span className='notification__close'>x</span>
+        </div>          
     );
 };
-export default Notification;
+const mapStateToProps = ({notification}) =>({
+    notification,
+});
+export default connect(mapStateToProps, null)(Notification);

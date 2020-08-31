@@ -69,7 +69,25 @@ export const blogReducer = (state = INITIAL_STATE, { type, payload }) => {
                 ...state,
                 isLoading: false,
                 notification: {type: 'error', text: 'Error creating blog post!'}
-            };           
+            };    
+        case TYPES.EDIT_POST_START:
+            return {
+                ...state,
+                isLoading: true
+            };
+        case TYPES.EDIT_POST_END:
+            return {
+                ...state,
+                isLoading: false,
+                notification: {type: 'success', text: 'Post successfully saved!'}
+
+            };
+        case TYPES.EDIT_POST_ERROR:
+            return {
+                ...state,
+                isLoading: false,
+                notification: {type: 'error', text: 'Error saving blog post!'}
+            };                  
         case TYPES.CREATE_CATEGORY_START:
             return {
                 ...state,
@@ -114,6 +132,23 @@ export const blogReducer = (state = INITIAL_STATE, { type, payload }) => {
                 ...state,
                 categoryId: payload
             };
+        case TYPES.DELETE_POST_START:
+            return {
+                ...state,
+                isLoading: true,
+            };    
+        case TYPES.DELETE_POST_END:
+            return {
+                ...state,
+                isLoading: false,
+                notification: {type: 'succes', text: 'Post deleted!'}
+            };
+        case TYPES.DELETE_POST_ERROR:
+            return {
+                ...state,
+                notification: {type: 'error', text: 'Post is not deleted!'}
+            };
+        
         default:
             return state;
 
