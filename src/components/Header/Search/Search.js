@@ -10,8 +10,8 @@ const Search = ({ search, categoryId, setShowSearched }) => {
 	const handleSearch = e => {
 		if (e.key === 'Enter') {
 			search(inputValue, categoryId);
-			setShowSearched(true);
-		}
+            setShowSearched(!!inputValue);
+        }       
 	};
 	return (
 		<div className="search">

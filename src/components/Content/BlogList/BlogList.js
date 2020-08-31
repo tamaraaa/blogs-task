@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { connect } from 'react-redux';
 
 import { activeCategory, getBlogs } from '../../../redux/actions';
@@ -25,7 +25,7 @@ const BlogList = ({
 	const handleCategory = id => {
 		activeCategory(id);
 		getBlogs(id);
-	};
+    };
 	return (
 		<div className="blogList">
 			{!showSearched && (

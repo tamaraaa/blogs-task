@@ -1,108 +1,108 @@
 @import '../../scss/variables.scss';
 
 .modal {
-    display: none;
-    height: auto;
-    border: 1px solid $text-color;
-    position: absolute;
-    top: 10vw;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1;
-    background-color: $background-color;
+	display: none;
+	height: auto;
+	border: 1px solid $text-color;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 1;
+	background-color: $background-color;
 
-    @media only screen and (max-width: 600px) {
-        width: 90%;
-    }
+	@media only screen and (max-width: 600px) {
+		width: 90%;
+	}
 
-    &__header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 10px 20px;
-        background: $header-color;
-        color: $light-text;
+	&__header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 10px 20px;
+		background: $header-color;
+		color: $light-text;
 
-        &__close {
-            cursor: pointer;
-        }
-    }
+		&__close {
+			cursor: pointer;
+			transform: scaleX(1.3);
+		}
+	}
 
-    &__content {
-        padding: 40px;
+	&__content {
+		padding: 40px;
 
-        @media only screen and (max-width: 600px) {
-            padding: 20px;
-        }
+		@media only screen and (max-width: 600px) {
+			padding: 20px;
+		}
 
-        &__title {
-            display: flex;
-            margin-bottom: 30px;
-            align-items: center;
+		&__title {
+			display: flex;
+			margin-bottom: 30px;
+			align-items: center;
 
-            p {
-                margin-right: 20px;
+			p {
+				margin-right: 20px;
 
-                @media only screen and (max-width: 600px) {
-                    font-size: 16px;
-                }
-            }
+				@media only screen and (max-width: 600px) {
+					font-size: 16px;
+				}
+			}
 
-            input {
-                padding: 5px 10px;
-            }
+			input {
+				padding: 5px 10px;
+			}
 
-            &__required {
-                color: $error-text;
-                padding-left: 10px;
-            }
-        }
+			&__required {
+				color: $error-text;
+				padding-left: 10px;
+			}
+		}
 
-        &__text {
-            display: flex;
+		&__text {
+			display: flex;
 
-            p {
-                margin-right: 20px;
-            }
+			p {
+				margin-right: 20px;
+			}
 
-            textarea {
-                padding: 5px 10px;
+			textarea {
+				padding: 5px 10px;
 
-                @media only screen and (max-width: 600px) {
-                    width: 70%;
-                }
-            }
+				@media only screen and (max-width: 600px) {
+					width: 70%;
+				}
+			}
 
-            &__required {
-                color: $error-text;
-                padding-left: 10px;
-            }
-        }
-    }
+			&__required {
+				color: $error-text;
+				padding-left: 10px;
+			}
+		}
+	}
 
-    &__buttons {
-        display: flex;
-        justify-content: space-between;
-        padding: 0 40px 20px 40px;
+	&__buttons {
+		display: flex;
+		justify-content: space-between;
+		padding: 0 40px 20px 40px;
 
-        button {
-            padding: 10px;
-            cursor: pointer;
-            color: $light-text;
-            background-color: $header-color;
-            width: fit-content;
-            border: none;
-            border-radius: 3px;
+		button {
+			padding: 10px;
+			cursor: pointer;
+			color: $light-text;
+			background-color: $header-color;
+			width: fit-content;
+			border: none;
+			border-radius: 3px;
 
-            &:disabled {
-                opacity: 0.5;
-                cursor: not-allowed;
-            }
-
-        }
-    }
+			&:disabled {
+				opacity: 0.5;
+				cursor: not-allowed;
+			}
+		}
+	}
 }
 
 .active {
-    display: block;
+	display: block;
 }

@@ -1,28 +1,29 @@
 @import '../../../../scss/variables.scss';
 
 .notification {
-    width: 90vw;
-    margin-bottom: 40px;
-    border: 2px solid $text-color;
-    height: 100px;
-    background-color: $background-light;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
+	width: 90vw;
+	margin-bottom: 40px;
+	border: 2px solid $text-color;
+	height: 100px;
+	background-color: $background-light;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
 
-    &__close {
-        position: absolute;
-        right: 15px;
-        top: 15px;
-        cursor: pointer;
-    }
+	&__close {
+		position: absolute;
+		right: 15px;
+		top: 15px;
+		transform: scaleX(1.3);
+		cursor: pointer;
+	}
 }
 
 .red-text {
-    border-color: $error-text;
+	border-color: $error-text;
 }
 
 .green-text {
-    border-color: $success-text;
+	border-color: $success-text;
 }
