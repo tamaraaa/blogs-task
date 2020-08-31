@@ -1,15 +1,14 @@
 @import './scss/variables.scss';
 
 html {
-  box-sizing: border-box;
-  font-size: 16px;
-
+	box-sizing: border-box;
+	font-size: 16px;
 }
 
 *,
 *:before,
 *:after {
-  box-sizing: inherit;
+	box-sizing: inherit;
 }
 
 body,
@@ -22,50 +21,52 @@ h6,
 p,
 ol,
 ul {
-  margin: 0;
-  padding: 0;
-  font-weight: normal;
-  font-family: 'Heebo', sans-serif;
+	margin: 0;
+	padding: 0;
+	font-weight: normal;
+	font-family: 'Heebo', sans-serif;
 }
 
 ol,
 ul {
-  list-style: none;
+	list-style: none;
 }
-
+input {
+	font-size: 16px;
+}
 .app {
-  text-align: center;
-  color: $text-color;
+	text-align: center;
+	color: $text-color;
 
-  &__zero-state {
-    position: absolute;
-    top: 10vw;
-    left: 50%;
-    transform: translate(-50%);
-    font-size: 25px;
+	&__zero-state {
+		position: absolute;
+		top: 10vw;
+		left: 50%;
+		transform: translate(-50%);
+		font-size: 25px;
 
-    @media only screen and (max-width: 1200px) {
-      font-size: 20px;
-      width: 90%;
+		@media only screen and (max-width: 1200px) {
+			font-size: 20px;
+			width: 90%;
 
-      img {
-        margin-top: 20px;
-        width: 100%;
-      }
-    }
+			img {
+				margin-top: 20px;
+				width: 100%;
+			}
+		}
 
-    @media only screen and (max-width: 480px) {
-      font-size: 15px;
-    }
-  }
+		@media only screen and (max-width: 480px) {
+			font-size: 15px;
+		}
+	}
 
-  &__backdrop {
-    background: black;
-    opacity: 0.7;
-    position: fixed;
-    height: 100%;
-    top: 0;
-    left: 0;
-    width: 100vw;
-  }
+	&__backdrop {
+		background: black;
+		opacity: 0.7;
+		position: fixed;
+		height: 100%;
+		top: 0;
+		left: 0;
+		width: 100vw;
+	}
 }
