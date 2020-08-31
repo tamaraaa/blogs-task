@@ -5,11 +5,11 @@ import {search} from '../../../redux/actions';
 
 import './Search.scss';
 
-const Search = ({search}) =>{
+const Search = ({search, categoryId}) =>{
     const [inputValue, setInputValue] = useState('');
     const handleSearch = (e) =>{
         if (e.key === 'Enter') {
-            search(inputValue);          }
+            search(inputValue, categoryId);          }
     };
     return (
         <div className='search'>
@@ -17,8 +17,8 @@ const Search = ({search}) =>{
         </div>
     );
 };
-const mapStateToProps = (state) =>({
-    state
+const mapStateToProps = ({categoryId}) =>({
+    categoryId
 });
 const mapDispatchToProps = {
     search

@@ -5,12 +5,12 @@ import BlogList from './BlogList/BlogList';
 
 import './Content.scss';
 
-const Content = ({setShowModal}) =>{
+const Content = ({setShowModal, setShowCategoryModal}) =>{
     return (
         <div className='content'>
             <h1 className='content__headline'>Welcome to My Blog</h1>
-            <AddBlog setShowModal={setShowModal}/>
-            <BlogList setShowModal={setShowModal}/>
+            <AddBlog setShowCategoryModal={setShowCategoryModal} setShowModal={setShowModal}/>
+            <BlogList setShowCategoryModal={setShowCategoryModal} setShowModal={setShowModal}/>
         </div>
     );
 };

@@ -10,32 +10,37 @@ import zeroStateImg from './images/zero-state.svg';
 
 import './App.scss';
 
-const CLASS = 'App';
-const App = ({getBlogs, categoryId, getCategories, categories}) =>{
+const App = ({getBlogs, categoryId, getCategories, categories, isReady}) =>{
 
   useEffect(()=>{
-    getCategories();
-    getBlogs(categoryId);
+      getCategories();
+      if (categoryId){
+        getBlogs(categoryId);
+      }
+   
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [categoryId]);
+  }, []);
   const [showModal, setShowModal] = useState(false);
+  const [showCategoryModal, setShowCategoryModal] = useState(false);
+  
   return (
-    <div className={CLASS}>
+    <div className='app'>
         <Header />
-        {categories && categories.length ? 
-          <Content setShowModal={setShowModal} /> :   
-          <div className={`${CLASS}__zero-state`}>
+        {isReady && ((categories && categories.length) ? 
+          <Content setShowModal={setShowModal} setShowCategoryModal={setShowCategoryModal}/> :   
+          <div className='app__zero-state'>
             <img src={zeroStateImg}/>
             <p>Currently there are no categories. To start creating click <a href='#' onClick={()=> setShowModal(true)}>here </a></p>
           </div>
-        }
-        <Modal setShowModal={setShowModal} showModal={showModal}/>
+        )}
+        <Modal showCategoryModal={showCategoryModal} setShowModal={setShowModal} showModal={showModal}/>
     </div>
   );
 };
-const mapStateToProps = ({categoryId, categories}) =>({
+const mapStateToProps = ({categoryId, categories, isReady}) =>({
   categoryId,
-  categories
+  categories,
+  isReady
 });
 const mapDispatchToProps = {
   getCategories,

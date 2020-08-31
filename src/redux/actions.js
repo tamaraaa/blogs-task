@@ -60,6 +60,7 @@ export const getBlogs = (categoryId) =>{
         dispatch(getBlogsStart());
         axios.get('https://frontend-api-test-nultien.azurewebsites.net/api/BlogPosts/GetPostByCategory?categoryId='+categoryId)
         .then(resp => {
+            console.log('results', resp.data.resultData);
             dispatch(getBlogsEnd(resp.data.resultData));
         })
         .catch(function (error) {
@@ -87,6 +88,7 @@ const createPostError = (error) =>{
     };
 };
 export const createPost = (categoryId, title, text) =>{
+    console.log('categoryId-create', categoryId);
     return dispatch =>{
         dispatch(createPostStart());
         axios.post('https://frontend-api-test-nultien.azurewebsites.net/api/BlogPosts', {categoryId, title, text})
@@ -125,6 +127,7 @@ export const createCategory = title =>{
         axios.post('https://frontend-api-test-nultien.azurewebsites.net/api/Category', {name: title})
         .then(resp => {
             dispatch(createCategoryEnd(resp.data.resultData));
+            dispatch(getCategories());
         })
         .catch(function (error) {
             console.log(error);
@@ -151,17 +154,22 @@ const searchError = (error) =>{
         error
     };
 };
-export const search = term =>{
+export const search = (term, categoryId) =>{
     return dispatch =>{
         dispatch(searchStart());
-        axios.get(`https://frontend-api-test-nultien.azurewebsites.net/api/BlogPosts/Search?term=${term}`)
-        .then(resp => {
-            dispatch(searchEnd(resp.data.resultData));
-        })
-        .catch(function (error) {
-            console.log(error);
-            dispatch(searchError(error));
-          });
+        if (term){
+            axios.get(`https://frontend-api-test-nultien.azurewebsites.net/api/BlogPosts/Search?term=${term}`)
+            .then(resp => {
+                dispatch(searchEnd(resp.data.resultData));
+            })
+            .catch(function (error) {
+                console.log(error);
+                dispatch(searchError(error));
+              });
+        } else {
+            dispatch(getBlogs(categoryId));
+        }
+        
     };
 };
 // DELETE POST
@@ -182,7 +190,7 @@ const deletePostError = (error) =>{
     };
 };
 export const deletePost = (post, categoryId) =>{
-    return dispatch =>{
+    return (dispatch, getState) =>{
         dispatch(deletePostStart());
         axios.delete(`https://frontend-api-test-nultien.azurewebsites.net/api/BlogPosts/${post}`)
         .then(resp => {
@@ -195,4 +203,58 @@ export const deletePost = (post, categoryId) =>{
             dispatch(deletePostError(error));
           });
     };
+};
+export const setCurrnetPost = post => {
+    return dispatch =>{
+        dispatch({
+            type: TYPES.SET_CURRENT_POST,
+            payload: post
+        });
+    };
+};
+const editPostStart = () =>{
+    return {
+        type: TYPES.EDIT_POST_START
+    };
+};
+const editPostEnd = () =>{
+    return {
+        type: TYPES.EDIT_POST_END,
+    };
+};
+const editPostError = (error) =>{
+    return {
+        type: TYPES.EDIT_POST_ERROR,
+        error
+    };
+};
+export const editPost = (text, title) =>{
+    return (dispatch, getState) =>{
+        const currentPost = getState().currentPost;
+        const updatedPost = { 
+                id: currentPost.id,
+                categoryId: currentPost.categoryId,
+                text,
+                title
+            };
+        console.log('updatedPost', updatedPost, 'post', getState().currentPost);
+        dispatch(editPostStart());
+        axios.put(`https://frontend-api-test-nultien.azurewebsites.net/api/BlogPosts/${updatedPost.id}`, {...updatedPost})
+        .then(resp => {
+            dispatch(editPostEnd());
+            dispatch(getBlogs(updatedPost.categoryId));
+
+        })
+        .catch(function (error) {
+            console.log(error);
+            dispatch(editPostError(error));
+          });
+    };
+};
+
+export const activeCategory = payload =>{
+    return dispatch=>{dispatch({
+        type: TYPES.SET_ACTIVE_CATEGORY,
+        payload
+    });};
 };

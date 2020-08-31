@@ -3,10 +3,12 @@ import * as TYPES from './action-types';
 const INITIAL_STATE = {
     blogList: [],
     isLoading: false,
+    isReady: false,
     error: false,
     searchedQuery: '',
-    categoryId: 2,
-    categories: []
+    categoryId: null,
+    categories: [],
+    currentPost: {title: '', text: '', isNew: true}
 };
 
 export const blogReducer = (state = INITIAL_STATE, { type, payload }) => {
@@ -19,9 +21,10 @@ export const blogReducer = (state = INITIAL_STATE, { type, payload }) => {
 		case TYPES.GET_CATEGORIES_END:
             return {
                 ...state,
+                isReady: true,
                 isLoading: false,
                 categories: payload,
-                // categoryId: payload[0].id
+                categoryId: payload && payload[0] && payload[0].id
             };
 		case TYPES.GET_CATEGORIES_ERROR:
 			return {
@@ -70,6 +73,7 @@ export const blogReducer = (state = INITIAL_STATE, { type, payload }) => {
         case TYPES.CREATE_CATEGORY_END:
             return {
                 ...state,
+                isLoading: false,
                 categories: payload,
             };
         case TYPES.CREATE_CATEGORY_ERROR:
@@ -93,7 +97,17 @@ export const blogReducer = (state = INITIAL_STATE, { type, payload }) => {
                 ...state,
                 isLoading: false,
                 error: payload
-            };           
+            };    
+        case TYPES.SET_CURRENT_POST:
+            return {
+                ...state,
+                currentPost: payload
+            };
+        case TYPES.SET_ACTIVE_CATEGORY:
+            return {
+                ...state,
+                categoryId: payload
+            };
         default:
             return state;
 

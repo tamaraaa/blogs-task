@@ -1,33 +1,40 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux';
-import {createPost, createCategory} from '../../redux/actions';
+import {createPost, createCategory, editPost} from '../../redux/actions';
 
 import './Modal.scss';
 
-const CLASS = 'Modal';
+const Modal = ({showModal, setShowModal, createPost, categoryId, categories, createCategory, currentPost, editPost, showCategoryModal}) =>{
 
-const Modal = ({showModal, setShowModal, createPost, categoryId, categories, createCategory}) =>{
-
-    const [title, setTitle] = useState('');
-    const [text, setText] = useState('');
+    const [title, setTitle] = useState(currentPost.title);
+    const [text, setText] = useState(currentPost.text);
     const [categoryTitle, setCatrgoryTitle] = useState('');
-    
+
+    useEffect(()=>{
+        setTitle(currentPost.title);
+        setText(currentPost.text);
+    }, [currentPost]);
+
     const handlePost = () =>{
-        createPost(categoryId, title, text);
+        if (currentPost.isNew){
+            createPost(categoryId, title, text);
+        } else {
+            editPost(text, title);
+        }
         setShowModal(false);
     };
     const handleCategory = () =>{
         createCategory(categoryTitle);
         setShowModal(false);
     };
-
+    console.log('showCategoryModal', showCategoryModal);
     const postModalContent = (
         <>
-        <div className={`${CLASS}__content__title`}>
+        <div className='modal__content__title'>
                     <p>Tiltle</p>
                     <input type='text' value={title} onChange={(e)=> setTitle(e.target.value)}/>
                 </div>
-                <div className={`${CLASS}__content__text`}>
+                <div className='modal__content__text'>
                     <p>Text</p>
                     <textarea value={text} onChange={(e)=>setText(e.target.value)} rows="4" cols="50" placeholder='Text of the post'></textarea>
                 </div>
@@ -35,36 +42,39 @@ const Modal = ({showModal, setShowModal, createPost, categoryId, categories, cre
     );
     const categoriesModalContent = (
         <>
-        <div className={`${CLASS}__content__title`}>
+        <div className='modal__content__title'>
                     <p>Category Tiltle</p>
                     <input type='text' value={categoryTitle} onChange={(e)=> setCatrgoryTitle(e.target.value)}/>
                 </div>
         </>
     );
-    const titleToShow = !categories ? 'Create Category':'Add/Edit blog post';
+    const titleToShow = !categories || showCategoryModal ? 'Create Category':'Add/Edit blog post';
     return (
-        <div className={`${CLASS} ${showModal ? 'active': ''}`}>
-            <div className={`${CLASS}__header`}>
-                <span className={`${CLASS}__header__title`}>{titleToShow}</span>
-                <span className={`${CLASS}__header__CLOSE`}> x </span>
+        <div className={`modal ${showModal ? 'active': ''}`}>
+            <div className='modal__header'>
+                <span className='modal__header__title'>{titleToShow}</span>
+                <span className='modal__header__CLOSE'> x </span>
             </div>
-            <div className={`${CLASS}__content`}>
-                {categories.length ? postModalContent : categoriesModalContent }
+            <div className='modal__content'>
+                {(categories && categories.length && !showCategoryModal) ? postModalContent : categoriesModalContent }
             </div>
-            <div className={`${CLASS}__buttons`}>
-                {categories.length ? <button className={`${CLASS}-buttons-post`} onClick={()=>handlePost()}>Post</button> : <button className={`${CLASS}-buttons-post`} onClick={()=>handleCategory()}>Create</button>}
-                <button className={`${CLASS}-buttons-cancel`} onClick={()=> setShowModal(false)}>Cancel</button>
+            <div className='modal__buttons'>
+                {(categories && categories.length && !showCategoryModal)? <button className='modal__buttons__post' onClick={()=>handlePost()}>Post</button> : <button className='modal__buttons__post' onClick={()=>handleCategory()}>Create</button>}
+                <button className='modal__buttons__cancel' onClick={()=> setShowModal(false)}>Cancel</button>
             </div>
 
         </div>
     );
 };
-const mapStateToProps = ({categoryId, categories}) =>({
+const mapStateToProps = ({categoryId, categories, currentPost, isNew}) =>({
     categoryId,
-    categories
+    categories,
+    currentPost,
+    isNew
 });
 const mapDispatchToProps = {
-    createPost: (categoryId, title, text) => (createPost(categoryId, title, text)),
-    createCategory: categoryTitle => (createCategory(categoryTitle))
+    createPost,
+    createCategory,
+    editPost
   };
 export default connect(mapStateToProps, mapDispatchToProps)(Modal);

@@ -18,9 +18,14 @@
         width: 30%;
         display: flex;
         flex-direction: column;
-        background-color: #F5F6F8;
+        background-color: $background-light;
         color: $text-color;
 
+        &__link {
+            &-active {
+                background-color: $light-blue;
+            }
+        }
 
         p {
             font-weight: bold;
@@ -29,33 +34,38 @@
         }
 
         span {
-            padding: 2vw;
-            height: 3vw;
+            text-align: left;
             display: flex;
+            flex-direction: column;
+            height: fit-content;
             align-items: center;
             cursor: pointer;
 
-            &:hover {
-                background-color: $light-blue;
-                font-weight: bolder;
-            }
-
             a {
+                width: 100%;
+                padding: 10px 20px;
                 text-decoration: none;
                 color: $text-color;
+
+                &:hover {
+                    background-color: $light-blue;
+                    font-weight: bolder;
+                }
             }
+
+
         }
 
         @media only screen and (max-width: 1200px) {
             width: 100%;
         }
 
-        span {
-            text-align: left;
 
-            a {
-                margin-right: 2vw;
-            }
+
+        button {
+            width: 200px;
+            align-self: flex-end;
+            padding: 5px;
         }
     }
 
