@@ -12,13 +12,10 @@ import zeroStateImg from './images/zero-state.svg';
 import './App.scss';
 
 const App = ({getBlogs, categoryId, getCategories, categories, isReady, isLoading}) =>{
+  const [showSearched, setShowSearched] = useState(false);
 
   useEffect(()=>{
       getCategories();
-      if (categoryId){
-        getBlogs(categoryId);
-      }
-   
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const [showModal, setShowModal] = useState(false);
@@ -26,9 +23,9 @@ const App = ({getBlogs, categoryId, getCategories, categories, isReady, isLoadin
   
   return (
     <div className='app'>
-        <Header />
+        <Header setShowSearched={setShowSearched} />
         {isReady && ((categories && categories.length) ? 
-          <Content setShowModal={setShowModal} setShowCategoryModal={setShowCategoryModal}/> :   
+          <Content setShowSearched={setShowSearched} showSearched={showSearched} setShowModal={setShowModal} setShowCategoryModal={setShowCategoryModal}/> :   
           <div className='app__zero-state'>
             <img src={zeroStateImg}/>
             <p>Currently there are no categories. To start creating click <a href='#' onClick={()=> setShowModal(true)}>here </a></p>

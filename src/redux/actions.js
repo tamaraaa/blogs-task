@@ -1,32 +1,33 @@
 import * as TYPES from './action-types';
 import axios from 'axios';
 
+const baseUrl = 'https://frontend-api-test-nultien.azurewebsites.net/api';
 // GET ALL CATEGORIES
-const getCategoriesStart = () =>{
+const getCategoriesStart = () => {
     return {
         type: TYPES.GET_CATEGORIES_START
     };
 };
-const getCategoriesEnd = (payload) =>{
+const getCategoriesEnd = (payload) => {
     return {
         type: TYPES.GET_CATEGORIES_END,
         payload
     };
 };
-const getCategoriesError = (error) =>{
+const getCategoriesError = (error) => {
     return {
         type: TYPES.GET_CATEGORIES_ERROR,
         error
     };
 };
-export const getCategories = () =>{
-    return dispatch =>{
+export const getCategories = () => {
+    return (dispatch, getState) => {
         dispatch(getCategoriesStart());
-        axios.get('https://frontend-api-test-nultien.azurewebsites.net//api/Category')
+        axios.get(`${baseUrl}/Category`)
         .then(resp => {
            console.log('data', resp.data);
            dispatch(getCategoriesEnd(resp.data.resultData));
-
+           dispatch(getBlogs(getState().categoryId));
         })
         .catch(function (error) {
             dispatch(getCategoriesError(error));
@@ -37,28 +38,28 @@ export const getCategories = () =>{
 
 // GET BLOGS FOR CATEGORY
 
-const getBlogsStart = () =>{
+const getBlogsStart = () => {
     return {
         type: TYPES.GET_BLOGS_START
     };
 };
-const getBlogsEnd = (payload) =>{
+const getBlogsEnd = (payload) => {
     return {
         type: TYPES.GET_BLOGS_END,
         payload
     };
 };
-const getBlogsError= (error) =>{
+const getBlogsError= (error) => {
     return {
         type: TYPES.GET_BLOGS_ERROR,
         error
     };
 };
-export const getBlogs = (categoryId) =>{
+export const getBlogs = (categoryId) => {
     console.log('categoryId', categoryId);
-    return dispatch =>{
+    return dispatch => {
         dispatch(getBlogsStart());
-        axios.get('https://frontend-api-test-nultien.azurewebsites.net/api/BlogPosts/GetPostByCategory?categoryId='+categoryId)
+        axios.get(`${baseUrl}/BlogPosts/GetPostByCategory?categoryId=${categoryId}`)
         .then(resp => {
             console.log('results', resp.data.resultData);
             dispatch(getBlogsEnd(resp.data.resultData));
@@ -71,27 +72,27 @@ export const getBlogs = (categoryId) =>{
 };
 
 // CREATE BLOG POST
-const createPostStart = () =>{
+const createPostStart = () => {
     return {
         type: TYPES.CREATE_POST_START
     };
 };
-const createPostEnd = () =>{
+const createPostEnd = () => {
     return {
         type: TYPES.CREATE_POST_END,
     };
 };
-const createPostError = (error) =>{
+const createPostError = (error) => {
     return {
         type: TYPES.CREATE_POST_ERROR,
         error
     };
 };
-export const createPost = (categoryId, title, text) =>{
+export const createPost = (categoryId, title, text) => {
     console.log('categoryId-create', categoryId);
-    return dispatch =>{
+    return dispatch => {
         dispatch(createPostStart());
-        axios.post('https://frontend-api-test-nultien.azurewebsites.net/api/BlogPosts', {categoryId, title, text})
+        axios.post(`${baseUrl}/BlogPosts`, {categoryId, title, text})
         .then(resp => {
             dispatch(createPostEnd());
             dispatch(getBlogs(categoryId));
@@ -104,27 +105,26 @@ export const createPost = (categoryId, title, text) =>{
 };
 // CREATE CATEGORY
 
-const createCategoryStart = () =>{
+const createCategoryStart = () => {
     return {
         type: TYPES.CREATE_CATEGORY_START
     };
 };
-const createCategoryEnd = (payload) =>{
+const createCategoryEnd = () => {
     return {
         type: TYPES.CREATE_CATEGORY_END,
-        payload
     };
 };
-const createCategoryError = (error) =>{
+const createCategoryError = (error) => {
     return {
         type: TYPES.CREATE_CATEGORY_ERROR,
         error
     };
 };
-export const createCategory = title =>{
-    return dispatch =>{
+export const createCategory = title => {
+    return dispatch => {
         dispatch(createCategoryStart());
-        axios.post('https://frontend-api-test-nultien.azurewebsites.net/api/Category', {name: title})
+        axios.post(`${baseUrl}/Category`, {name: title})
         .then(resp => {
             dispatch(createCategoryEnd(resp.data.resultData));
             dispatch(getCategories());
@@ -137,28 +137,28 @@ export const createCategory = title =>{
     };
 };
 // SEARCH POST
-const searchStart = () =>{
+const searchStart = () => {
     return {
         type: TYPES.SEARCH_START
     };
 };
-const searchEnd = (payload) =>{
+const searchEnd = (payload) => {
     return {
         type: TYPES.SEARCH_END,
         payload
     };
 };
-const searchError = (error) =>{
+const searchError = (error) => {
     return {
         type: TYPES.SEARCH_ERROR,
         error
     };
 };
-export const search = (term, categoryId) =>{
-    return dispatch =>{
+export const search = (term, categoryId) => {
+    return dispatch => {
         dispatch(searchStart());
         if (term){
-            axios.get(`https://frontend-api-test-nultien.azurewebsites.net/api/BlogPosts/Search?term=${term}`)
+            axios.get(`${baseUrl}/BlogPosts/Search?term=${term}`)
             .then(resp => {
                 dispatch(searchEnd(resp.data.resultData));
             })
@@ -173,26 +173,26 @@ export const search = (term, categoryId) =>{
     };
 };
 // DELETE POST
-const deletePostStart = () =>{
+const deletePostStart = () => {
     return {
         type: TYPES.DELETE_POST_START
     };
 };
-const deletePostEnd = () =>{
+const deletePostEnd = () => {
     return {
         type: TYPES.DELETE_POST_END,
     };
 };
-const deletePostError = (error) =>{
+const deletePostError = (error) => {
     return {
         type: TYPES.DELETE_POST_ERROR,
         error
     };
 };
-export const deletePost = (post, categoryId) =>{
-    return (dispatch, getState) =>{
+export const deletePost = (post, categoryId) => {
+    return dispatch => {
         dispatch(deletePostStart());
-        axios.delete(`https://frontend-api-test-nultien.azurewebsites.net/api/BlogPosts/${post}`)
+        axios.delete(`${baseUrl}/BlogPosts/${post}`)
         .then(resp => {
             dispatch(deletePostEnd());
             dispatch(getBlogs(categoryId));
@@ -205,31 +205,31 @@ export const deletePost = (post, categoryId) =>{
     };
 };
 export const setCurrnetPost = post => {
-    return dispatch =>{
+    return dispatch => {
         dispatch({
             type: TYPES.SET_CURRENT_POST,
             payload: post
         });
     };
 };
-const editPostStart = () =>{
+const editPostStart = () => {
     return {
         type: TYPES.EDIT_POST_START
     };
 };
-const editPostEnd = () =>{
+const editPostEnd = () => {
     return {
         type: TYPES.EDIT_POST_END,
     };
 };
-const editPostError = (error) =>{
+const editPostError = (error) => {
     return {
         type: TYPES.EDIT_POST_ERROR,
         error
     };
 };
-export const editPost = (text, title) =>{
-    return (dispatch, getState) =>{
+export const editPost = (text, title) => {
+    return (dispatch, getState) => {
         const currentPost = getState().currentPost;
         const updatedPost = { 
                 id: currentPost.id,
@@ -239,7 +239,7 @@ export const editPost = (text, title) =>{
             };
         console.log('updatedPost', updatedPost, 'post', getState().currentPost);
         dispatch(editPostStart());
-        axios.put(`https://frontend-api-test-nultien.azurewebsites.net/api/BlogPosts/${updatedPost.id}`, {...updatedPost})
+        axios.put(`${baseUrl}/BlogPosts/${updatedPost.id}`, {...updatedPost})
         .then(resp => {
             dispatch(editPostEnd());
             dispatch(getBlogs(updatedPost.categoryId));
@@ -252,8 +252,8 @@ export const editPost = (text, title) =>{
     };
 };
 
-export const activeCategory = payload =>{
-    return dispatch=>{dispatch({
+export const activeCategory = payload => {
+    return dispatch=> {dispatch({
         type: TYPES.SET_ACTIVE_CATEGORY,
         payload
     });};

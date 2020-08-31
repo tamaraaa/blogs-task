@@ -8,7 +8,8 @@ const INITIAL_STATE = {
     searchedQuery: '',
     categoryId: null,
     categories: [],
-    currentPost: {title: '', text: '', isNew: true}
+    currentPost: {title: '', text: '', isNew: true},
+    notification: null
 };
 
 export const blogReducer = (state = INITIAL_STATE, { type, payload }) => {
@@ -24,13 +25,15 @@ export const blogReducer = (state = INITIAL_STATE, { type, payload }) => {
                 isReady: true,
                 isLoading: false,
                 categories: payload,
-                categoryId: payload && payload[0] && payload[0].id
+                // set selection to the first category, if available
+                categoryId: payload && payload[0] && payload[0].id,
             };
 		case TYPES.GET_CATEGORIES_ERROR:
 			return {
                 ...state,
                 isLoading: false,
-                error: payload
+                error: payload,
+                notification: {type: 'error', text: 'Error getting categories!'}
             };
         case TYPES.GET_BLOGS_START:
 			return {
@@ -47,7 +50,7 @@ export const blogReducer = (state = INITIAL_STATE, { type, payload }) => {
 			return {
                 ...state,
                 isLoading: false,
-                error: payload
+                notification: {type: 'error', text: 'Error getting blog posts!'}
             };
         case TYPES.CREATE_POST_START:
             return {
@@ -58,29 +61,31 @@ export const blogReducer = (state = INITIAL_STATE, { type, payload }) => {
             return {
                 ...state,
                 isLoading: false,
+                notification: {type: 'success', text: 'Post successfully created!'}
+
             };
         case TYPES.CREATE_POST_ERROR:
             return {
                 ...state,
                 isLoading: false,
-                error: payload
+                notification: {type: 'error', text: 'Error creating blog post!'}
             };           
         case TYPES.CREATE_CATEGORY_START:
             return {
                 ...state,
-                isLoading: true
+                isLoading: true,
             };
         case TYPES.CREATE_CATEGORY_END:
             return {
                 ...state,
                 isLoading: false,
-                categories: payload,
+                notification: {type: 'success', text: 'Category successfully created!'}
             };
         case TYPES.CREATE_CATEGORY_ERROR:
             return {
                 ...state,
                 isLoading: false,
-                error: payload
+                notification: {type: 'error', text: 'Error creating category!'}
             }; 
         case TYPES.SEARCH_START:
             return {
@@ -91,12 +96,13 @@ export const blogReducer = (state = INITIAL_STATE, { type, payload }) => {
             return {
                 ...state,
                 blogList: payload,
+                isLoading: false
             };
         case TYPES.SEARCH_ERROR:
             return {
                 ...state,
                 isLoading: false,
-                error: payload
+                notification: {type: 'error', text: 'Search error!'}
             };    
         case TYPES.SET_CURRENT_POST:
             return {

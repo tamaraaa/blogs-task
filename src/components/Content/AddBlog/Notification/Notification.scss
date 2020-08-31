@@ -1,0 +1,9 @@
+@import '../../../../scss/variables.scss';
+
+.notification {
+    width: 90vw;
+    margin-bottom: 2vw;
+    border: 1px solid $text-color;
+    height: 5vw;
+    background-color: $background-light;
+}

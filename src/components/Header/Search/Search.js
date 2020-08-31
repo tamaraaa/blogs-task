@@ -5,11 +5,13 @@ import {search} from '../../../redux/actions';
 
 import './Search.scss';
 
-const Search = ({search, categoryId}) =>{
+const Search = ({search, categoryId, setShowSearched}) =>{
     const [inputValue, setInputValue] = useState('');
     const handleSearch = (e) =>{
         if (e.key === 'Enter') {
-            search(inputValue, categoryId);          }
+            search(inputValue, categoryId);  
+            setShowSearched(true);
+        }
     };
     return (
         <div className='search'>

@@ -6,14 +6,6 @@
     align-items: flex-end;
     margin: 0 auto;
 
-    &__notifications {
-        width: 90vw;
-        margin-bottom: 2vw;
-        border: 1px solid $text-color;
-        height: 5vw;
-        background-color: $background-light;
-    }
-
     &__button {
         width: 30vw;
         cursor: pointer;

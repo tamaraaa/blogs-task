@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import {setCurrnetPost} from '../../../redux/actions';
 
+import Notification from './Notification/Notification.js';
+
 import './AddBlog.scss';
 
-const AddBolg = ({setShowModal, setCurrnetPost, setShowCategoryModal}) =>{
+const AddBlog = ({setShowModal, setCurrnetPost, setShowCategoryModal, notification}) =>{
     const handleAddBlog = () =>{
         setShowCategoryModal(false);
         setShowModal(true);
@@ -12,7 +14,7 @@ const AddBolg = ({setShowModal, setCurrnetPost, setShowCategoryModal}) =>{
     };
     return (
         <div className='addBlog'>
-            <div className='addBlog__notifications'> </div>          
+            {notification && <Notification/>}
             <button className='addBlog__button' onClick={()=>handleAddBlog() }>Add Post</button>  
         </div>
     );
@@ -21,4 +23,8 @@ const AddBolg = ({setShowModal, setCurrnetPost, setShowCategoryModal}) =>{
 const mapDispatchToProps ={
     setCurrnetPost,
 };
-export default connect(null, mapDispatchToProps)(AddBolg);
+const mapStateToProps = ({notification}) =>({
+    notification,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddBlog);

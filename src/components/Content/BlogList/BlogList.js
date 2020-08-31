@@ -6,18 +6,19 @@ import Blog from './Blog/Blog';
 
 import './BlogList.scss';
 
-const BlogList = ({categories, blogList, setShowModal, categoryId, setShowCategoryModal, activeCategory, getBlogs}) =>{
+const BlogList = ({categories, blogList, setShowModal, categoryId, setShowCategoryModal, activeCategory, getBlogs, showSearched, setShowSearched}) =>{
+
     const handleAddCategory = () =>{
         setShowCategoryModal(true);
         setShowModal(true);
     };
     const handleCategory = (id) =>{
-        getBlogs(categoryId);
         activeCategory(id);
+        getBlogs(id);
     };
     return (
         <div className='blogList'>
-            <div className='blogList__categories'>
+            {!showSearched && <div className='blogList__categories'>
                 <p>Blog Categories</p>
                 <span>
                 { categories.length && categories.map( category =>{
@@ -25,8 +26,9 @@ const BlogList = ({categories, blogList, setShowModal, categoryId, setShowCatego
                 })}
                 </span>  
                 <button onClick={()=>handleAddCategory()}>Add Category</button>       
-            </div>
+            </div>}
             <div className='blogList__list'>
+            {showSearched && <p>Search results for all categories <a href='#' onClick={()=>setShowSearched(false)}>back</a></p>}
             { blogList && blogList.map( blog=>(<Blog setShowModal={setShowModal} key={`${blog.id}${blog.title}`} blog={blog}/>))}  
             </div>
         </div>
