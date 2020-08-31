@@ -1,7 +1,6 @@
 @import '../../scss/variables.scss';
 
 .modal {
-    // width: 40vw;
     display: none;
     height: auto;
     border: 1px solid $text-color;
@@ -9,8 +8,12 @@
     top: 10vw;
     left: 50%;
     transform: translateX(-50%);
-    z-index: 100;
+    z-index: 1;
     background-color: $background-color;
+
+    @media only screen and (max-width: 600px) {
+        width: 90%;
+    }
 
     &__header {
         display: flex;
@@ -28,6 +31,10 @@
     &__content {
         padding: 40px;
 
+        @media only screen and (max-width: 600px) {
+            padding: 20px;
+        }
+
         &__title {
             display: flex;
             margin-bottom: 30px;
@@ -35,6 +42,10 @@
 
             p {
                 margin-right: 20px;
+
+                @media only screen and (max-width: 600px) {
+                    font-size: 16px;
+                }
             }
 
             input {

@@ -6,15 +6,33 @@
     border-radius: 5px;
     background-color: $light-blue;
 
+    @media only screen and (max-width: 600px) {
+        padding: 15px 21px;
+    }
+
     &__header {
         display: flex;
         justify-content: space-between;
+
+        @media only screen and (max-width: 600px) {
+            flex-direction: column;
+        }
+
 
         &__buttons {
             width: 25%;
             height: fit-content;
             display: flex;
             justify-content: space-between;
+
+            @media only screen and (max-width: 600px) {
+                width: 100%;
+                height: -moz-fit-content;
+                height: fit-content;
+                display: flex;
+                justify-content: space-between;
+                margin-top: 10px;
+            }
 
             button {
                 cursor: pointer;
@@ -27,6 +45,13 @@
                 text-align: center;
                 border: none;
 
+                @media only screen and (max-width: 600px) {
+                    width: 50px;
+                    padding: 0;
+                    height: 30px;
+                }
+
+
             }
         }
 
@@ -36,6 +61,12 @@
             &__img {
                 width: 80px;
                 height: 80px;
+
+                @media only screen and (max-width: 600px) {
+                    width: 60px;
+                    height: 60px;
+                }
+
             }
 
             &__text {
@@ -43,10 +74,20 @@
                 flex-direction: column;
                 align-items: flex-start;
                 margin-left: 20px;
+                font-size: 20px;
 
-                font-size: 20px &__title {
+                @media only screen and (max-width: 600px) {
+                    font-size: 16px;
+                    text-align: left;
+                }
+
+                &__title {
                     font-size: 25px;
                     font-weight: bold;
+
+                    @media only screen and (max-width: 600px) {
+                        font-size: 20px;
+                    }
                 }
             }
         }
@@ -65,6 +106,12 @@
         &__image {
             width: 100px;
             height: 100px;
+
+            @media only screen and (max-width: 600px) {
+                width: 80px;
+                height: 80px;
+            }
+
         }
     }
 }

@@ -46,6 +46,12 @@ ul {
 
     @media only screen and (max-width: 1200px) {
       font-size: 20px;
+      width: 90%;
+
+      img {
+        margin-top: 20px;
+        width: 100%;
+      }
     }
 
     @media only screen and (max-width: 480px) {
