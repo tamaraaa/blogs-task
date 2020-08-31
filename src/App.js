@@ -5,12 +5,13 @@ import { getBlogs, getCategories } from './redux/actions';
 import Header from './components/Header/Header';
 import Content from './components/Content/Content.js';
 import Modal from './components/Modal/Modal';
+import Loader from './components/Loader/Loader';
 
 import zeroStateImg from './images/zero-state.svg';
 
 import './App.scss';
 
-const App = ({getBlogs, categoryId, getCategories, categories, isReady}) =>{
+const App = ({getBlogs, categoryId, getCategories, categories, isReady, isLoading}) =>{
 
   useEffect(()=>{
       getCategories();
@@ -34,13 +35,16 @@ const App = ({getBlogs, categoryId, getCategories, categories, isReady}) =>{
           </div>
         )}
         <Modal showCategoryModal={showCategoryModal} setShowModal={setShowModal} showModal={showModal}/>
+        {isLoading  && <Loader/>}
+        {showModal && <div className='app__backdrop' onClick={()=>setShowModal(false)}></div>}
     </div>
   );
 };
-const mapStateToProps = ({categoryId, categories, isReady}) =>({
+const mapStateToProps = ({categoryId, categories, isReady, isLoading}) =>({
   categoryId,
   categories,
-  isReady
+  isReady,
+  isLoading
 });
 const mapDispatchToProps = {
   getCategories,

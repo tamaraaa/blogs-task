@@ -44,4 +44,14 @@ ul {
     transform: translate(-50%);
     font-size: 2vw
   }
+
+  &__backdrop {
+    background: black;
+    opacity: 0.7;
+    position: fixed;
+    height: 100%;
+    top: 0;
+    left: 0;
+    width: 100vw;
+  }
 }
