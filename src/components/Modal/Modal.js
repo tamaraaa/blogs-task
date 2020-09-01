@@ -36,6 +36,10 @@ const Modal = ({
 		createCategory(categoryTitle);
 		setShowModal(false);
 	};
+	const handleCancel = () => {
+		setShowModal(false);
+		setCatrgoryTitle('');
+	};
 	const isPostDisabled = !text || !title;
 	const createCategoryDisabled = !categoryTitle;
 	const postTitle = isPostDisabled ? 'Title and text field must not be empty' : '';
@@ -82,7 +86,7 @@ const Modal = ({
 		<div className={`modal ${showModal ? 'active' : ''}`}>
 			<div className="modal__header">
 				<span className="modal__header__title">{titleToShow}</span>
-				<span className="modal__header__close" onClick={() => setShowModal(false)}>
+				<span className="modal__header__close" onClick={handleCancel}>
 					x
 				</span>
 			</div>
@@ -106,7 +110,7 @@ const Modal = ({
 						Create
 					</button>
 				)}
-				<button className="modal__buttons__cancel" onClick={() => setShowModal(false)}>
+				<button className="modal__buttons__cancel" onClick={handleCancel}>
 					Cancel
 				</button>
 			</div>

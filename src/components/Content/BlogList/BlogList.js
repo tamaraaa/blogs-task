@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import { activeCategory, getBlogs } from '../../../redux/actions';
@@ -25,7 +25,7 @@ const BlogList = ({
 	const handleCategory = id => {
 		activeCategory(id);
 		getBlogs(id);
-    };
+	};
 	return (
 		<div className="blogList">
 			{!showSearched && (
@@ -63,6 +63,7 @@ const BlogList = ({
 				{blogList &&
 					blogList.map(blog => (
 						<Blog
+							setShowCategoryModal={setShowCategoryModal}
 							setShowModal={setShowModal}
 							key={`${blog.id}${blog.title}`}
 							blog={blog}

@@ -8,7 +8,7 @@ import avatar1 from '../../../../images/avatars/avatar1.jpg';
 
 import './Blog.scss';
 
-const Blog = ({ blog, deletePost, categoryId, setCurrnetPost, setShowModal }) => {
+const Blog = ({ blog, deletePost, categoryId, setCurrnetPost, setShowModal, setShowCategoryModal }) => {
 	const postedDate = (
 		<p>
 			Posted date {formatDate(blog.createdAt).date} at {formatDate(blog.createdAt).time}{' '}
@@ -18,6 +18,7 @@ const Blog = ({ blog, deletePost, categoryId, setCurrnetPost, setShowModal }) =>
 		'https://sisterhoodofstyle.com/wp-content/uploads/2018/02/no-image-1.jpg',
 	);
 	const handleEdit = () => {
+		setShowCategoryModal(false);
 		setShowModal(true);
 		setCurrnetPost(blog);
 	};
